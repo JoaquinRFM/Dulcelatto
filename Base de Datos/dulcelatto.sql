@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2025 at 12:52 PM
+-- Generation Time: May 11, 2025 at 09:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,6 +72,30 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `imagen`) VALU
 (30, 'Helado de Maracuyá con Chips de Chocolate', 'Helado tropical con toque ácido y trozos crujientes de chocolate.', 14.30, '../assets/img/postres/helado_de_maracuya_con_chips_de_chocolate.jpg'),
 (31, 'Torta de Plátano y Nuez Caramelizada', 'Bizcocho húmedo de plátano con nueces tostadas y glaseado de caramelo caliente', 59.60, '../assets/img/postres/torta_de_platano_y_nuez_caramelizada.jpg');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id_us` int(11) NOT NULL,
+  `nombre_us` varchar(100) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `fech_nacmnto` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `usuario`
+--
+
+INSERT INTO `usuario` (`id_us`, `nombre_us`, `correo`, `password`, `fech_nacmnto`) VALUES
+(1, 'luciana', 'luciana@gmail.com', '251006', '2006-10-25'),
+(2, 'maria', 'maria@gmail.com', '12345', '2004-07-22'),
+(3, 'juan', 'juan5412@gmail.com', 'juan', '2025-05-29'),
+(4, 'Joaquin', 'joaquin@gmail.com', 'femboy', '2005-03-04');
+
 --
 -- Indexes for dumped tables
 --
@@ -83,6 +107,12 @@ ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_us`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -91,6 +121,12 @@ ALTER TABLE `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_us` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
