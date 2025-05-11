@@ -16,7 +16,7 @@ $cart_count = 0;
             <button>Buscar</button>
         </div>
         <div class="user-actions">
-            <a href="#" class="sign-in">
+            <a href="../pages/usuarios.php" class="sign-in">
                 <img src="../assets/img/sign_in.jpg" alt="Sign In">
                 <span>Ingresar</span>
             </a>

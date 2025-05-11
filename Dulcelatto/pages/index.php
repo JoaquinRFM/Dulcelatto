@@ -10,6 +10,8 @@
     <link rel="canonical" href="https://www.dulcelatto.com" />
     <title>Dulcelatto - Postres</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="website icon" type="png" href="../assets/img/logo.png">
     
     <!-- Open Graph / Facebook -->
