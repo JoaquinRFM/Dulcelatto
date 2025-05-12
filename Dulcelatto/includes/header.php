@@ -1,10 +1,4 @@
-<?php
-// Simulamos un contador de carrito para el diseño (se integrará con PHP después)
-$cart_count = 0;
-?>
-
 <header>
-    <!-- Primera fila: Logo, búsqueda, Sign In, My Orders, Carrito -->
     <div class="header-top">
         <div class="logo">
             <a href="index.php">
@@ -31,7 +25,6 @@ $cart_count = 0;
         </div>
     </div>
 
-    <!-- Segunda fila: Links a otras páginas -->
     <nav class="header-middle">
         <a href="#">Dia de la madre</a>
         <a href="#">Cumpleaños</a>
@@ -42,7 +35,6 @@ $cart_count = 0;
         <a href="#">Regalos en descuento</a>
     </nav>
 
-    <!-- Tercera fila: Categorías con submenús desplegables -->
     <nav class="header-bottom">
         <div class="dropdown">
             <a href="#" class="dropbtn">Festivos y ocasiones</a>

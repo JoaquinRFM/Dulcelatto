@@ -21,7 +21,7 @@ if($v1=='' || $v2=='')
     </script>";
 }
 
-
+//Verificar coincidencia de datos
 if($v1==$x1 and $v2==$x2)
 {
     echo "<script>

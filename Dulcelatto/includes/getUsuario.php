@@ -9,6 +9,7 @@ $v2=$_POST['fech_nacmto'];
 $v3=$_POST['correo_usuario'];
 $v4=$_POST['password'];
 
+//Verifica campos vacios
 if($v1=='' || $v2=='' || $v3=='' || $v4=='')
 {
     echo "<script>
@@ -17,6 +18,7 @@ if($v1=='' || $v2=='' || $v3=='' || $v4=='')
     </script>";
 }
 
+//Verifica correo repetido
 $query="SELECT * FROM usuario WHERE correo='$v3'";
 $resultado=mysqli_query($conn,$query);
 $rst=mysqli_fetch_array($resultado);	
@@ -29,6 +31,7 @@ if($rst)
     </script>";
 }
 
+//Inserta el usuario en la base de datos
 else
 {
     $query="INSERT INTO usuario(nombre_us,fech_nacmnto,correo,password) VALUES ('$v1','$v2','$v3','$v4')";

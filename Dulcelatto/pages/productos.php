@@ -13,7 +13,7 @@
     <main>
         <h1>Nuestros Postres</h1>
         <section class="productos-grid">
-            <!-- Los productos se cargarán dinámicamente con JS -->
+            <!-- Productos cargados dinamicamente con javascript -->
         </section>
     </main>
     <?php include '../includes/footer.php'; ?>
