@@ -1,13 +1,17 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const productosGrid = document.querySelector('.productos-grid');
-    if (!productosGrid) {
-        console.error('Error: No se encontró el contenedor .productos-grid');
+document.addEventListener('DOMContentLoaded', function() {     
+    const categoriaGrid = document.querySelector('.categoria-grid');
+    if (!categoriaGrid) {
+        console.error('Error: No se encontró el contenedor .categoria-grid');
         return;
     }
 
-    console.log('Iniciando solicitud fetch a ../includes/getProductos.php');
+    console.log('Iniciando solicitud fetch a ../includes/getCategorias.php');
 
-    fetch('../includes/getProductos.php')
+    const categoriaSeleccionada = categoriaGrid.getAttribute('data-categoria');
+    console.log('Categoría seleccionada:', categoriaSeleccionada);
+
+    // Realiza una solicitud a getCategorias.php
+    fetch('../includes/getCategorias.php')
         .then(response => {
             console.log('Respuesta recibida:', response);
             if (!response.ok) {
@@ -20,18 +24,35 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.error) {
                 throw new Error(data.error);
             }
-            if (!Array.isArray(data) || data.length === 0) {
-                throw new Error('No se recibieron productos válidos');
+
+            categoriaGrid.innerHTML = '';
+
+            // Verificar si la categoría seleccionada existe en los datos
+            if (categoriaSeleccionada) {
+                if (data[categoriaSeleccionada] && data[categoriaSeleccionada].length > 0) {
+                    agregarProductosPorCategoria(categoriaSeleccionada, data[categoriaSeleccionada]);
+                } else {
+                    categoriaGrid.innerHTML = '<p>No hay productos disponibles en esta categoría.</p>';
+                }
+            } else {
+                // Mostrar todas las categorías si no se selecciona ninguna
+                Object.keys(data).forEach(categoria => {
+                    agregarProductosPorCategoria(categoria, data[categoria]);
+                });
             }
+        })
+        .catch(error => console.error('Error:', error));
 
-            const productos = data;
-            productos.forEach((producto, index) => {
-                console.log(`Generando producto ${index + 1}: ${producto.nombre}`);
-                const productoDiv = document.createElement('div');
-                productoDiv.classList.add('producto');
-                productoDiv.style.cursor = 'pointer'; // Indica que el producto es clickable
+    function agregarProductosPorCategoria(categoria, productos) {
+        const categoryContainer = document.createElement('div');
+        categoryContainer.classList.add('productos-grid');
 
-                let priceHTML = '';
+        productos.forEach(producto => {
+            const productoDiv = document.createElement('div');    
+            productoDiv.classList.add('producto');
+            productoDiv.style.cursor = 'pointer';
+
+            let priceHTML = '';
                 const price = producto.price || 'Precio no disponible';
                 if (typeof price === 'string' && price.includes('SALE')) {
                     const [originalPrice, salePrice] = price.split(' SALE ');
@@ -47,40 +68,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="price">Precio: S/.${priceHTML}</div>
                 `;
 
-                // Añadir event listener para abrir el modal al hacer clic
-                productoDiv.addEventListener('click', () => {
-                    openProductModal(producto);
-                });
-
-                console.log('Añadiendo producto al DOM:', productoDiv);
-                productosGrid.appendChild(productoDiv);
+            productoDiv.addEventListener('click', () => {
+                openProductModal(producto);
             });
 
-            console.log('Total de productos añadidos:', productosGrid.children.length);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            productosGrid.innerHTML = '<p>Error al cargar los productos. Por favor, intenta de nuevo más tarde.</p>';
+            categoryContainer.appendChild(productoDiv);
         });
 
-    // Función para abrir el modal con los detalles del producto
+        categoriaGrid.appendChild(categoryContainer);
+    }
+
     function openProductModal(producto) {
-        // Crear el fondo del modal (overlay)
         const overlay = document.createElement('div');
         overlay.classList.add('modal-overlay');
 
-        // Crear el contenedor del modal
         const modal = document.createElement('div');
         modal.classList.add('modal');
 
-        // Calificación estática
         const ratingHTML = `
             <div class="modal-rating">
                 <span>★★★★★</span>
             </div>
         `;
 
-        // Contenido del modal
         modal.innerHTML = `
             <div class="modal-content">
                 <span class="modal-close">&times;</span>
@@ -104,18 +114,15 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
 
-        // Añadir el modal y el overlay al cuerpo
         document.body.appendChild(overlay);
         document.body.appendChild(modal);
 
-        // Añadir evento para cerrar el modal al hacer clic en la "X"
         const closeBtn = modal.querySelector('.modal-close');
         closeBtn.addEventListener('click', () => {
             modal.remove();
             overlay.remove();
         });
 
-        // Añadir evento para cerrar el modal al hacer clic fuera de él (en el overlay)
         overlay.addEventListener('click', () => {
             modal.remove();
             overlay.remove();
