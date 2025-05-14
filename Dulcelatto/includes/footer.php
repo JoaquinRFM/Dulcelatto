@@ -1,3 +1,7 @@
+<?php
+// footer.php
+?>
+
 <footer class="site-footer">
     <div class="footer-content">
         <div class="footer-column">

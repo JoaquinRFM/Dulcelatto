@@ -1,5 +1,10 @@
-<header>
+<header>    
+    <!-- Primera fila: Logo, búsqueda, Sign In, My Orders, Carrito -->
     <div class="header-top">
+        <button class="menu-btn">
+            <img src="../assets/img/menu-icon.png" alt="Menú">
+            <span>Menú</span>
+        </button>
         <div class="logo">
             <a href="index.php">
                 <img src="../assets/img/logo.jpeg" alt="Dulcelatto">
@@ -20,142 +25,67 @@
             </a>
             <a href="#" class="cart">
                 <img src="../assets/img/cart.jpg" alt="Cart">
-                <span>Carrito</span>
+                <span>(0)<span>Carrito</span></span>
             </a>
         </div>
     </div>
-
+    <div class="espacio"></div>
+    <!-- Segunda fila: Links a otras páginas -->
     <nav class="header-middle">
-        <a href="#">Dia de la madre</a>
-        <a href="#">Cumpleaños</a>
-        <a href="#">Agradecimiento</a>
-        <a href="#">Elije el tuyo</a>
-        <a href="#">Delivery inmediato</a>
-        <a href="#">A tan solo S/.10</a>
-        <a href="#">Regalos en descuento</a>
+        <a href="categoria.php?categoria=Pasteles y Tortas">Pasteles y Tortas</a>
+        <a href="categoria.php?categoria=Helados">Helados</a>
+        <a href="categoria.php?categoria=Galletas y Bizcochos">Galletas y Bizcochos</a>
+        <a href="categoria.php?categoria=Cupcakes">Cupcakes</a>
+        <a href="categoria.php?categoria=Postres salados">Postres salados</a>
+        <a href="categoria.php?categoria=Postres dulces">Postres dulces</a>
+        <a href="categoria.php?categoria=Postres de crema o frias">Postres de crema o frias</a>
     </nav>
-
-    <nav class="header-bottom">
-        <div class="dropdown">
-            <a href="#" class="dropbtn">Festivos y ocasiones</a>
-            <div class="dropdown-content">
-                <div class="dropdown-inner">
-                    <div class="dropdown-column">
-                        <h4>Regalos festivos</h4>
-                        <a href="#">Regalos por el dia de las madres</a>
-                        <a href="#">Regalos de verano</a>
-                        <a href="#">Graduacion</a>
-                        <a href="#">Regalo para maestros</a>
-                        <a href="#">Semana de las enfermeras</a>
-                        <a href="#">Paquetes de atencion universitaria</a>
-                    </div>
-                    <div class="dropdown-column">
-                        <h4>Ocasiones diarias</h4>
-                        <a href="#">Cumpleaños</a>
-                        <a href="#">Agradecimiento</a>
-                        <a href="#">Regalos carinosos</a>
-                        <a href="#">Regalos de recuperacion</a>
-                        <a href="#">Celebracion</a>
-                        <a href="#">Regalos para animar</a>
-                        <a href="#">Pensando en ti</a>
-                        <a href="#">Regalos para bebes</a>
-                        <a href="#">Regalos de boda</a>
-                        <a href="#">Regalos de aniversario</a>
-                        <a href="#">Estreno de casa</a>
-                    </div>
-                    <div class="dropdown-images">
-                        <img src="../assets/img/Torta_madre.jpg" alt="Mother's Day Gifts">
-                    </div>
+    
+    <div class="menu-overlay"></div>
+    <div class="menu-lateral">
+        <div class="menu-content">
+            <div class="header-menu">
+                <div>
+                    <img src="../assets/img/logo.jpeg" alt="Dulcelatto" style="height: 28px; width: auto;">
                 </div>
-            </div>
-        </div>
-        <div class="dropdown">
-            <a href="#" class="dropbtn">Comprar por regalo</a>
-            <div class="dropdown-content">
-                <div class="dropdown-inner">
-                    <div class="dropdown-column">
-                        <h4>Que hay de nuevo</h4>
-                        <a href="#">Coleccion de barbie</a>
-                        <a href="#">Coleccion de disney</a>
-                        <a href="#">Cupckaes y pasteles</a>
-                        <a href="#">Crema de helado</a>
-                        <a href="#">Paletas</a>
-                        <a href="#">Dulcelatto Colecion Premium</a>
-                    </div>
-                    <div class="dropdown-images">
-                        <img src="../assets/img/cupcake.jpg" alt="Cupcakes">
-                    </div>
+                <div class="spacer"></div>
+                <div>
+                    <a href="../pages/usuarios.php" class="sign-in">
+                        <img src="../assets/img/sign_in.jpg" alt="Sign In">
+                        <span>Ingresar</span>
+                    </a>
                 </div>
+                <button class="xmenu-btn">
+                    <img src="../assets/img/x_menu.png" alt="salir del menú">
+                </button>
             </div>
-        </div>
-        <div class="dropdown">
-            <a href="#" class="dropbtn">Comprar por sabor</a>
-            <div class="dropdown-content">
-                <div class="dropdown-inner">
-                    <div class="dropdown-column">
-                        <h4>Sabores</h4>
-                        <a href="#">Chocolate</a>
-                        <a href="#">Vainilla</a>
-                        <a href="#">Frutales</a>
-                        <a href="#">Caramelo</a>
-                        <a href="#">Cafe</a>
-                        <a href="#">Limon</a>
-                    </div>
-                    <div class="dropdown-images">
-                        <img src="../assets/img/chocolate.jpg" alt="Chocolate">
-                    </div>
-                </div>
+            <div class="part1-menu">
+                <a href="categoria.php?categoria=Pasteles y Tortas">
+                    <img src="../assets/img/pasteles_y_tortas.png" alt="Pasteles y Tortas">
+                    <h4>Pasteles y Tortas</h4>
+                </a>
+                <a href="categoria.php?categoria=Helados">
+                    <img src="../assets/img/helados.jpg" alt="Helados">
+                    <h4>Helados</h4>
+                </a>
+                <a href="categoria.php?categoria=Galletas y Bizcochos">
+                    <img src="../assets/img/galletas.png" alt="Galletas">
+                    <h4>Galletas y Bizcochos</h4>
+                </a>
+                <a href="categoria.php?categoria=Postres salados">
+                    <img src="../assets/img/postres_salados.png" alt="Postres salados">
+                    <h4>Postres salados</h4>
+                </a>
+                <a href="categoria.php?categoria=Postres dulces">
+                    <img src="../assets/img/postres_dulces.png" alt="Postres dulces">
+                    <h4>Postres dulces</h4>   
+                </a>
+                <a href="categoria.php?categoria=Postres de crema o frias">
+                    <img src="../assets/img/postres_de_crema-o-frio.jpeg" alt="Postres de crema o frias">
+                    <h4>Postres de crema o frias</h4>   
+                </a>
             </div>
-        </div>
-        <div class="dropdown">
-            <a href="#" class="dropbtn">Comprar por precio</a>
-            <div class="dropdown-content">
-                <div class="dropdown-inner">
-                    <div class="dropdown-column">
-                        <h4>Rangos de precio</h4>
-                        <a href="#">Menos de S/.10</a>
-                        <a href="#">S/.10 - S/.20</a>
-                        <a href="#">S/.20 - S/.30</a>
-                        <a href="#">Mas de S/.30</a>
-                    </div>
-                    <div class="dropdown-images">
-                        <img src="../assets/img/cheap_gift.jpg" alt="Under $10">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="dropdown">
-            <a href="#" class="dropbtn">Regalos corporativos</a>
-            <div class="dropdown-content">
-                <div class="dropdown-inner">
-                    <div class="dropdown-column">
-                        <h4>Opciones corporativas</h4>
-                        <a href="#">Pedidos al por mayor</a>
-                        <a href="#">Marca personalizada</a>
-                        <a href="#">Tarjetas de regalo</a>
-                    </div>
-                    <div class="dropdown-images">
-                        <img src="../assets/img/bulk_order.jpg" alt="Bulk Orders">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="dropdown">
-            <a href="#" class="dropbtn">Comunidad</a>
-            <div class="dropdown-content">
-                <div class="dropdown-inner">
-                    <div class="dropdown-column">
-                        <h4>Comunidad</h4>
-                        <a href="#">Recetas</a>
-                        <a href="#">Blog</a>
-                        <a href="#">Eventos</a>
-                        <a href="#">Testimonios</a>
-                    </div>
-                    <div class="dropdown-images">
-                        <img src="../assets/img/events.jpg" alt="Events">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+       </div>
+   </div>
+   <script src="../assets/js/scripHeader.js"></script>
 </header>
