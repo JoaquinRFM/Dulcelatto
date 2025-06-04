@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const categoriaSeleccionada = categoriaGrid.getAttribute('data-categoria');
     console.log('Categoría seleccionada:', categoriaSeleccionada);
 
-    // Realiza una solicitud a getCategorias.php
-    fetch('../includes/getCategorias.php')
+    fetch('http://farbeg.com/Dulcelatto-main/Dulcelatto/includes/getCategorias.php')
+    //fetch('../includes/getCategorias.php')
         .then(response => {
             console.log('Respuesta recibida:', response);
             if (!response.ok) {
@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             categoriaGrid.innerHTML = '';
 
-            // Verificar si la categoría seleccionada existe en los datos
             if (categoriaSeleccionada) {
                 if (data[categoriaSeleccionada] && data[categoriaSeleccionada].length > 0) {
                     agregarProductosPorCategoria(categoriaSeleccionada, data[categoriaSeleccionada]);
@@ -35,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     categoriaGrid.innerHTML = '<p>No hay productos disponibles en esta categoría.</p>';
                 }
             } else {
-                // Mostrar todas las categorías si no se selecciona ninguna
                 Object.keys(data).forEach(categoria => {
                     agregarProductosPorCategoria(categoria, data[categoria]);
                 });
@@ -53,20 +51,20 @@ document.addEventListener('DOMContentLoaded', function() {
             productoDiv.style.cursor = 'pointer';
 
             let priceHTML = '';
-                const price = producto.price || 'Precio no disponible';
-                if (typeof price === 'string' && price.includes('SALE')) {
-                    const [originalPrice, salePrice] = price.split(' SALE ');
-                    priceHTML = `<span class="old-price">${originalPrice}</span><span>${salePrice}</span>`;
-                } else {
-                    priceHTML = `<span>${price}</span>`;
-                }
+            const price = producto.price || 'Precio no disponible';
+            if (typeof price === 'string' && price.includes('SALE')) {
+                const [originalPrice, salePrice] = price.split(' SALE ');
+                priceHTML = `<span class="old-price">${originalPrice}</span><span>${salePrice}</span>`;
+            } else {
+                priceHTML = `<span>${price}</span>`;
+            }
 
-                productoDiv.innerHTML = `
-                    <img src="${producto.imagen}" alt="${producto.nombre}">
-                    <h3>${producto.nombre}</h3>
-                    ${producto.rating ? `<div class="rating">${producto.rating}</div>` : ''}
-                    <div class="price">Precio: S/.${priceHTML}</div>
-                `;
+            productoDiv.innerHTML = `
+                <img src="${producto.imagen}" alt="${producto.nombre}">
+                <h3>${producto.nombre}</h3>
+                ${producto.rating ? `<div class="rating">${producto.rating}</div>` : ''}
+                <div class="price">Precio: S/.${priceHTML}</div>
+            `;
 
             productoDiv.addEventListener('click', () => {
                 openProductModal(producto);
@@ -93,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         modal.innerHTML = `
             <div class="modal-content">
-                <span class="modal-close">&times;</span>
+                <span class="modal-close">×</span>
                 <div class="modal-left">
                     <img src="${producto.imagen}" alt="${producto.nombre}">
                 </div>
@@ -109,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h3>Cantidad:</h3>
                         <input type="number" class="modal-quantity" value="1" min="1">
                     </div>
-                    <button class="modal-add-to-cart">Agregar al carrito</button>
+                    <button class="modal-add-to-cart" data-id="${producto.id}">Agregar al carrito</button>
                 </div>
             </div>
         `;
@@ -126,6 +124,62 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.addEventListener('click', () => {
             modal.remove();
             overlay.remove();
+        });
+
+        const productImage = modal.querySelector('.modal-left img');
+        productImage.addEventListener('click', () => {
+            const zoomOverlay = document.createElement('div');
+            zoomOverlay.classList.add('modal-overlay');
+
+            const zoomModal = document.createElement('div');
+            zoomModal.classList.add('image-zoom-modal');
+            zoomModal.innerHTML = `
+                <span class="modal-close">×</span>
+                <img src="${producto.imagen}" alt="${producto.nombre}">
+            `;
+
+            document.body.appendChild(zoomOverlay);
+            document.body.appendChild(zoomModal);
+
+            const zoomCloseBtn = zoomModal.querySelector('.modal-close');
+            zoomCloseBtn.addEventListener('click', () => {
+                zoomModal.remove();
+                zoomOverlay.remove();
+            });
+
+            zoomOverlay.addEventListener('click', () => {
+                zoomModal.remove();
+                zoomOverlay.remove();
+            });
+        });
+
+        const addToCartBtn = modal.querySelector('.modal-add-to-cart');
+        addToCartBtn.addEventListener('click', () => {
+            const cantidad = parseInt(modal.querySelector('.modal-quantity').value);
+            fetch('../includes/add_to_cart.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `id_producto=${producto.id}&cantidad=${cantidad}`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    if (data.success) {
+                        modal.remove();
+                        overlay.remove();
+                        fetch('../includes/get_cart_count.php')
+                            .then(res => res.json())
+                            .then(cartData => {
+                                if (cartData.success) {
+                                    document.querySelector('#cart-count').textContent = cartData.count;
+                                }
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al añadir al carrito');
+                });
         });
     }
 });

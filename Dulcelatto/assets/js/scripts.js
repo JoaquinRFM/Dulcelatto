@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('Iniciando solicitud fetch a ../includes/getProductos.php');
 
-    fetch('../includes/getProductos.php')
+    fetch('http://farbeg.com/Dulcelatto-main/Dulcelatto/includes/getProductos.php')
+    //fetch('../includes/getProductos.php')
         .then(response => {
             console.log('Respuesta recibida:', response);
             if (!response.ok) {
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log(`Generando producto ${index + 1}: ${producto.nombre}`);
                 const productoDiv = document.createElement('div');
                 productoDiv.classList.add('producto');
-                productoDiv.style.cursor = 'pointer'; // Indica que el producto es clickable
+                productoDiv.style.cursor = 'pointer';
 
                 let priceHTML = '';
                 const price = producto.price || 'Precio no disponible';
@@ -47,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="price">Precio: S/.${priceHTML}</div>
                 `;
 
-                // Añadir event listener para abrir el modal al hacer clic
                 productoDiv.addEventListener('click', () => {
                     openProductModal(producto);
                 });
@@ -57,33 +57,24 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             console.log('Total de productos añadidos:', productosGrid.children.length);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            productosGrid.innerHTML = '<p>Error al cargar los productos. Por favor, intenta de nuevo más tarde.</p>';
         });
 
-    // Función para abrir el modal con los detalles del producto
     function openProductModal(producto) {
-        // Crear el fondo del modal (overlay)
         const overlay = document.createElement('div');
         overlay.classList.add('modal-overlay');
 
-        // Crear el contenedor del modal
         const modal = document.createElement('div');
         modal.classList.add('modal');
 
-        // Calificación estática
         const ratingHTML = `
             <div class="modal-rating">
                 <span>★★★★★</span>
             </div>
         `;
 
-        // Contenido del modal
         modal.innerHTML = `
             <div class="modal-content">
-                <span class="modal-close">&times;</span>
+                <span class="modal-close">×</span>
                 <div class="modal-left">
                     <img src="${producto.imagen}" alt="${producto.nombre}">
                 </div>
@@ -99,26 +90,79 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h3>Cantidad:</h3>
                         <input type="number" class="modal-quantity" value="1" min="1">
                     </div>
-                    <button class="modal-add-to-cart">Agregar al carrito</button>
+                    <button class="modal-add-to-cart" data-id="${producto.id}">Agregar al carrito</button>
                 </div>
             </div>
         `;
 
-        // Añadir el modal y el overlay al cuerpo
         document.body.appendChild(overlay);
         document.body.appendChild(modal);
 
-        // Añadir evento para cerrar el modal al hacer clic en la "X"
         const closeBtn = modal.querySelector('.modal-close');
         closeBtn.addEventListener('click', () => {
             modal.remove();
             overlay.remove();
         });
 
-        // Añadir evento para cerrar el modal al hacer clic fuera de él (en el overlay)
         overlay.addEventListener('click', () => {
             modal.remove();
             overlay.remove();
+        });
+
+        const productImage = modal.querySelector('.modal-left img');
+        productImage.addEventListener('click', () => {
+            const zoomOverlay = document.createElement('div');
+            zoomOverlay.classList.add('modal-overlay');
+
+            const zoomModal = document.createElement('div');
+            zoomModal.classList.add('image-zoom-modal');
+            zoomModal.innerHTML = `
+                <span class="modal-close">×</span>
+                <img src="${producto.imagen}" alt="${producto.nombre}">
+            `;
+
+            document.body.appendChild(zoomOverlay);
+            document.body.appendChild(zoomModal);
+
+            const zoomCloseBtn = zoomModal.querySelector('.modal-close');
+            zoomCloseBtn.addEventListener('click', () => {
+                zoomModal.remove();
+                zoomOverlay.remove();
+            });
+
+            zoomOverlay.addEventListener('click', () => {
+                zoomModal.remove();
+                zoomOverlay.remove();
+            });
+        });
+
+        const addToCartBtn = modal.querySelector('.modal-add-to-cart');
+        addToCartBtn.addEventListener('click', () => {
+            const cantidad = parseInt(modal.querySelector('.modal-quantity').value);
+            fetch('../includes/add_to_cart.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `id_producto=${producto.id}&cantidad=${cantidad}`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    if (data.success) {
+                        modal.remove();
+                        overlay.remove();
+                        fetch('../includes/get_cart_count.php')
+                            .then(res => res.json())
+                            .then(cartData => {
+                                if (cartData.success) {
+                                    document.querySelector('#cart-count').textContent = cartData.count;
+                                }
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al añadir al carrito');
+                });
         });
     }
 });
