@@ -1,43 +1,37 @@
-<body onLoad="f_volver();">
-<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-
 <?php
 include 'db_connect.php';
 
-$v1=$_POST['nombre_usuario'];
-$v2=$_POST['fech_nacmto'];
-$v3=$_POST['correo_usuario'];
-$v4=$_POST['password'];
-
-if($v1=='' || $v2=='' || $v3=='' || $v4=='')
-{
-    echo "<script>
-        alert('LLena todos los datos');
-        window.location.href = '../pages/usuarios.php';
-    </script>";
+if (!isset($_POST['nombre']) || !isset($_POST['fech_nacmnto']) || !isset($_POST['correo']) || !isset($_POST['password'])) {
+    header('Location: ../pages/usuarios.php?error=missing_data');
+    exit;
 }
 
-$query="SELECT * FROM usuario WHERE correo='$v3'";
-$resultado=mysqli_query($conn,$query);
-$rst=mysqli_fetch_array($resultado);	
+$nombre = $_POST['nombre'];
+$fech_nacmnto = $_POST['fech_nacmnto'];
+$correo = $_POST['correo'];
+$password = $_POST['password'];
 
-if($rst)
-{
-    echo "<script>
-        alert('Correo ya registrado');
-        window.location.href = '../pages/usuarios.php';
-    </script>";
+$stmt = $conn->prepare("SELECT id_us FROM usuario WHERE correo = ?");
+$stmt->bind_param("s", $correo);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    header('Location: ../pages/usuarios.php?error=email_exists');
+    exit;
 }
 
-else
-{
-    $query="INSERT INTO usuario(nombre_us,fech_nacmnto,correo,password) VALUES ('$v1','$v2','$v3','$v4')";
-    $resultado=mysqli_query($conn,$query);
-    echo "<script>
-        window.location.href = '../pages/index.php';
-    </script>";
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+$stmt = $conn->prepare("INSERT INTO usuario (nombre_us, fech_nacmnto, correo, password) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("ssss", $nombre, $fech_nacmnto, $correo, $hashed_password);
+
+if ($stmt->execute()) {
+    header('Location: ../pages/usuarios.php?registered=true');
+} else {
+    header('Location: ../pages/usuarios.php?error=registration_failed');
 }
 
-
+$stmt->close();
+$conn->close();
 ?>
-</body>

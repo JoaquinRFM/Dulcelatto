@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
-$username = 'root'; // Cambia esto si tu usuario de MySQL es diferente
-$password = ''; // Cambia esto si tu contraseña de MySQL es diferente
+$username = 'lfarfan'; // Cambia esto si tu usuario de MySQL es diferente cambiar: lfarfan / cambiar: root
+$password = 'luciana60794523'; // Cambia esto si tu contraseña de MySQL es diferente cambiar: luciana60794523
 $dbname = 'dulcelatto';
 
 // Conectar a la base de datos con MySQLi

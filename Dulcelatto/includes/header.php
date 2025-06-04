@@ -1,4 +1,50 @@
+<?php session_start(); ?>
 <header>    
+    <style>
+        .search-results {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        .search-result-item:hover {
+            background: #f9f9f9;
+        }
+        .search-result-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .search-result-item h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: #333;
+        }
+        .search-result-item p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
     <!-- Primera fila: Logo, búsqueda, Sign In, My Orders, Carrito -->
     <div class="header-top">
         <button class="menu-btn">
@@ -23,9 +69,9 @@
                 <img src="../assets/img/my_orders.jpg" alt="My Orders">
                 <span>Mis pedidos</span>
             </a>
-            <a href="#" class="cart">
+            <a href="../pages/carrito.php" class="cart">
                 <img src="../assets/img/cart.jpg" alt="Cart">
-                <span>(0)<span>Carrito</span></span>
+                <span>Carrito (<span id="cart-count">0</span>)</span>
             </a>
         </div>
     </div>
@@ -88,4 +134,25 @@
        </div>
    </div>
    <script src="../assets/js/scripHeader.js"></script>
+   <script src="../assets/js/search.js"></script>
 </header>
+<div class="user-actions">
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <a href="#">Bienvenido, <?php echo htmlspecialchars($_SESSION['nombre_us']); ?></a>
+        <a href="../includes/logout.php">Cerrar sesión</a>
+    <?php else: ?>
+        <a href="../pages/usuarios.php">Iniciar sesión</a>
+        <a href="../pages/usuarios.php">Registrarse</a>
+    <?php endif; ?>
+</div>
+<script>
+    // Actualizar contador del carrito
+    fetch('../includes/get_cart_count.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.querySelector('#cart-count').textContent = data.count;
+            }
+        })
+        .catch(error => console.error('Error al actualizar contador:', error));
+</script>
