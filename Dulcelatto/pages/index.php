@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../assets/css/header.css">
     <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="website icon" type="png" href="../assets/img/logo.png">
+    <link rel="alternate" type="application/rdf+xml" href="../rdfs/productos.rdf.php" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="Store">

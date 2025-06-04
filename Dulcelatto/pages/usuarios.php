@@ -1,49 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<title>Iniciar Sesion</title>
-	<link rel="stylesheet" href = "../assets/css/styleLoginPage.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Dulcelatto</title>
+    <link rel="stylesheet" href="../assets/css/styleLoginPage.css">
 </head>
 <body>
-	<div class ="container">
-		<div class ="form sign-in-container" >
-			<form method="post" class ="sing-in" action="../includes/setUsuario.php">
-				<img src="../assets/img/logo.jpeg">
-				<h1> Iniciar Sesión </h1>
-				<span> Use su correo y contraseña </span>
-				<div class = "container-input">
-					<input type="text" name="correo_usuario" placeholder="Correo Electrónico">
-				</div>
-				<div class = "container-input">
-					<input type="password" name="password" placeholder="Contraseña">
-				</div>
-				<input type="submit" value="INICIAR SESION" class="boton" />
-				<a class = "ok-account"> ¿No tiene cuenta? Registrate</a>
-			</form>
-		</div>
-		<div class ="form sign-up-container" >
-			<form method="post" class ="sing-up" action="../includes/getUsuario.php">
-				<img src="../assets/img/logo.jpeg">
-				<h1> Regístrate </h1>
-				<span> Use su correo electrónico para registrarse </span>
-				<div class = "container-input">
-					<input type="text" name="nombre_usuario" placeholder="Nombre de Usuario">
-				</div>
-				<div class = "container-input">
-					<input type="date" name="fech_nacmto" placeholder="Fecha de nacimiento">
-				</div>
-				<div class = "container-input">
-					<input type="text" name="correo_usuario" placeholder="Email">
-				</div>
-				<div class = "container-input">
-					<input type="password" name="password" placeholder="Contraseña">
-				</div>
-				<input type="submit" value="REGISTRARSE" class="boton" />
-				<a class = "no-account"> ¿Ya tiene cuenta? Inicie Sesion</a>
-			</form>
-		</div>
-	</div>
-	<script src="../assets/js/scripLogt.js"></script>
+    <div class="login-wrapper">
+        <div class="sign-in-container">
+			<div class="form">
+				<form action="../includes/login.php" method="POST">
+                	<h2>Iniciar Sesión</h2>
+                	<p>Use su correo y contraseña</p>
+                	<div class="container-input"><input type="email" name="correo" placeholder="Correo" required></div>
+                	<div class="container-input"><input type="password" name="password" placeholder="Contraseña" required></div>
+                	<button type="submit">Iniciar Sesión</button>
+                	<p>¿No tiene cuenta? <a href="#" class="ok-account">Registrarse</a></p>
+            	</form>
+			</div>
+        </div>
+        <div class="sign-up-container" style="display: none;">
+			<div class="form">
+            	<form action="../includes/getUsuario.php" method="POST">
+            	    <h2>Regístrese</h2>
+            	    <p>Use su correo electrónico para registrarse</p>
+            	    <div class="container-input"><input type="text" name="nombre" placeholder="Nombre" required></div>
+            	    <div class="container-input"><input type="date" name="fech_nacmnto" placeholder="Fecha de Nacimiento" required></div>
+            	    <div class="container-input"><input type="email" name="correo" placeholder="Correo" required></div>
+            	    <div class="container-input"><input type="password" name="password" placeholder="Contraseña" required></div>
+            	    <button type="submit">Registrarse</button>
+            	    <p>¿Ya tiene cuenta? <a href="#" class="no-account">Inicie Sesión</a></p>
+            	</form>
+			</div>
+        </div>
+    </div>
+    <script src="../assets/js/scripLogt.js"></script>
 </body>
 </html>
