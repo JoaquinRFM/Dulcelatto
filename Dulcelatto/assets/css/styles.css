@@ -172,4 +172,8 @@ main {
         padding: 1rem; /* Reduce el relleno */
         padding-bottom: 2rem; /* Ajusta el relleno inferior */
     }
+    
+    .sliders div {
+       height: 200px; 
+    }
 }

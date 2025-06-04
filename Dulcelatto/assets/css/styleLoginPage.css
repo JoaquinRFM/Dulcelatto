@@ -1,43 +1,36 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body 
-{
+body {
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-	background-color: white;
+    background-color: white;
     font-family: Arial;
 }
 
-.container
-{
+.sign-in-container, .sign-up-container {
     max-width: 600px;
     width: 100%;
     display: flex;
     border-radius: 10px;
-    /*background-color: aliceblue;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 24px 0 rgba(0, 0, 0, 0.19);*/
 }
 
-.form
-{
+.sign-in-container .form, .sign-up-container .form {
     width: 100%;
     height: 100%;
 }
 
-.sign-up-container
-{
+.sign-up-container {
     display: none;
 }
 
-.form form
-{
+.sign-in-container .form form, .sign-up-container .form form {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -45,22 +38,19 @@ body
     align-items: center;
 }
 
-.form h1
-{
+.sign-in-container .form h1, .sign-up-container .form h1 {
     color: RGB(51, 51, 51);
     font-size: 30px;
     margin-bottom: 1px;
 }
 
-.form span
-{
+.sign-in-container .form span, .sign-up-container .form span {
     color: RGB(51, 51, 51);
     font-size: 15px;
     margin-bottom: 15px;
 }
 
-.container-input
-{
+.sign-in-container .container-input, .sign-up-container .container-input {
     width: 300px;
     height: 40px;
     margin-bottom: 10px;
@@ -72,16 +62,15 @@ body
     background-color: #cde9eb;
 }
 
-.container-input input{
-    border:  none;
+.sign-in-container .container-input input, .sign-up-container .container-input input {
+    border: none;
     outline: none;
     width: 100%;
     height: 100%;
     background-color: inherit;
 }
 
-.form a
-{
+.sign-in-container .form a, .sign-up-container .form a {
     display: block;
     margin: auto;
     margin-bottom: 15px;
@@ -89,16 +78,13 @@ body
     color: #333;
     font-size: 14px;
     cursor: pointer;
-
 }
 
-.form a:hover
-{
+.sign-in-container .form a:hover, .sign-up-container .form a:hover {
     text-decoration: underline;
 }
 
-.boton
-{
+.sign-in-container .boton, .sign-up-container .boton {
     width: 170px;
     height: 45px;
     font-size: 15px;
@@ -110,13 +96,11 @@ body
     background-color: #00c4cc;
 }
 
-.boton:hover
-{
+.sign-in-container .boton:hover, .sign-up-container .boton:hover {
     background-color: #00a0a6;
 }
 
-img
-{
+.sign-in-container img, .sign-up-container img {
     display: flex;
     justify-content: center;
     align-items: center;
