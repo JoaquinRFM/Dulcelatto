@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2025 at 03:15 PM
+-- Generation Time: Jun 04, 2025 at 09:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `dulcelatto`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carrito`
+--
+
+CREATE TABLE `carrito` (
+  `id_carrito` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL DEFAULT 1,
+  `fecha_agregado` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `carrito`
+--
+
+INSERT INTO `carrito` (`id_carrito`, `id_usuario`, `id_producto`, `cantidad`, `fecha_agregado`) VALUES
+(1, 6, 4, 1, '2025-06-04 05:58:48'),
+(3, 6, 2, 3, '2025-06-04 06:09:00'),
+(4, 6, 40, 1, '2025-06-04 06:25:06'),
+(5, 6, 8, 6, '2025-06-04 06:28:38');
 
 -- --------------------------------------------------------
 
@@ -212,7 +236,7 @@ CREATE TABLE `usuario` (
   `id_us` int(11) NOT NULL,
   `nombre_us` varchar(100) NOT NULL,
   `correo` varchar(100) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `fech_nacmnto` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -221,14 +245,20 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_us`, `nombre_us`, `correo`, `password`, `fech_nacmnto`) VALUES
-(1, 'luciana', 'luciana@gmail.com', '251006', '2006-10-25'),
-(2, 'maria', 'maria@gmail.com', '12345', '2004-07-22'),
-(3, 'juan', 'juan5412@gmail.com', 'juan', '2025-05-29'),
-(4, 'Joaquin', 'joaquin@gmail.com', 'femboy', '2005-03-04');
+(6, 'Joaquin', 'joaquin@gmail.com', '$2y$10$ha3Yi4koXTwRiUPC.vylj.m6wMYnP87M.vPMVVt8RU6pe5/Q0IoUe', '2005-04-03'),
+(7, 'Luciana', 'luciana@gmail.com', '$2y$10$Z/maz.RSjELLEe/Xa7OYrOlGjyEFtz9J6k.Y63vi5KJUDNoSWr2Ni', '2006-10-25');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `carrito`
+--
+ALTER TABLE `carrito`
+  ADD PRIMARY KEY (`id_carrito`),
+  ADD KEY `id_producto` (`id_producto`),
+  ADD KEY `idx_carrito_usuario_producto` (`id_usuario`,`id_producto`);
 
 --
 -- Indexes for table `categorias`
@@ -254,6 +284,12 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT for table `carrito`
+--
+ALTER TABLE `carrito`
+  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
@@ -269,11 +305,18 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_us` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_us` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `carrito`
+--
+ALTER TABLE `carrito`
+  ADD CONSTRAINT `carrito_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_us`) ON DELETE CASCADE,
+  ADD CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `productos`
