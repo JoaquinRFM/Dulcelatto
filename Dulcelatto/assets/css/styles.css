@@ -1,0 +1,179 @@
+/* Estilos globales para el documento */
+* {
+    margin: 0; /* Elimina los márgenes predeterminados */
+    padding: 0; /* Elimina el relleno predeterminado */
+    box-sizing: border-box; /* Usa el modelo de caja que incluye bordes y relleno en las dimensiones */
+}
+
+body {
+    font-family: Arial, sans-serif; /* Establece la fuente predeterminada */
+    margin: 0; /* Elimina márgenes del body */
+    padding: 0; /* Elimina relleno del body */
+    min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la ventana */
+    display: flex; /* Usa flexbox para el diseño */
+    flex-direction: column; /* Organiza los elementos en columna */
+}
+
+main {
+    flex: 1; /* Hace que el main ocupe todo el espacio disponible, empujando el footer al final */
+    padding: 2rem; /* Agrega relleno al contenido principal */
+    text-align: center; /* Centra el texto dentro del main */
+}
+
+/* Estilos para la sección de sliders */
+.sliders {
+    display: flex; /* Usa flexbox para alinear los elementos */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    gap: 5px; /* Espacio entre los elementos */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    overflow: hidden; /* Oculta contenido que desborde */
+}
+
+.sliders div {
+    height: 500px; /* Establece la altura de cada div del slider */
+    width: 300px; /* Establece el ancho inicial de cada div */
+    border: 2px solid white; /* Agrega un borde blanco */
+    border-radius: 10px; /* Redondea las esquinas */
+    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Añade transición suave para cambios */
+    cursor: pointer; /* Cambia el cursor a puntero al pasar por encima */
+    filter: brightness(0.9); /* Reduce ligeramente el brillo */
+}
+
+.sliders:hover div {
+    filter: brightness(0.5); /* Reduce el brillo de todos los divs al pasar por encima del slider */
+    width: 200px; /* Reduce el ancho de los divs */
+}
+
+.sliders div:hover {
+    filter: brightness(1); /* Restaura el brillo completo al div seleccionado */
+    width: 600px; /* Aumenta el ancho del div seleccionado */
+    z-index: 10; /* Coloca el div por encima de los demás */
+}
+
+.div1 {
+    background-image: url(../img/slider_1.jpg); /* Establece la imagen de fondo para el primer div */
+    background-position: center; /* Centra la imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+}
+
+.div2 {
+    background-image: url(../img/slider_2.jpg); /* Establece la imagen de fondo para el segundo div */
+    background-position: center; /* Centra la imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+}
+
+.div3 {
+    background-image: url(../img/slider_3.jpg); /* Establece la imagen de fondo para el tercer div */
+    background-position: center; /* Centra la imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+}
+
+.div4 {
+    background-image: url(../img/slider_4.jpg); /* Establece la imagen de fondo para el cuarto div */
+    background-position: center; /* Centra la imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+}
+
+.div5 {
+    background-image: url(../img/slider_5.jpg); /* Establece la imagen de fondo para el quinto div */
+    background-position: center; /* Centra la imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+}
+
+.div6 {
+    background-image: url(../img/slider_6.jpg); /* Establece la imagen de fondo para el sexto div */
+    background-position: center; /* Centra la imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+}
+
+/* Estilos para la sección introductoria */
+.intro-section {
+    padding: 2rem; /* Agrega relleno a la sección */
+    text-align: center; /* Centra el contenido */
+    background-color: #fff; /* Establece el color de fondo blanco */
+}
+
+.intro-text {
+    background-color: #fff9e6; /* Establece un color de fondo claro */
+    padding: 2rem; /* Agrega relleno interno */
+    padding-bottom: 3rem; /* Añade más relleno en la parte inferior */
+    margin-bottom: 2rem; /* Agrega margen inferior */
+    border-radius: 8px; /* Redondea las esquinas */
+    width: 1200px; /* Establece un ancho fijo */
+    margin: 0 auto; /* Centra el contenedor */
+}
+
+.intro-text p {
+    font-size: 1.5rem; /* Establece el tamaño de fuente para el texto */
+    font-style: italic; /* Aplica estilo cursiva */
+    color: #333; /* Establece el color del texto */
+    margin-bottom: 1rem; /* Agrega margen inferior */
+}
+
+.intro-text .author {
+    font-size: 1rem; /* Establece el tamaño de fuente para el autor */
+    color: #666; /* Establece el color del texto */
+    font-weight: bold; /* Aplica negrita */
+}
+
+.intro-buttons {
+    display: flex; /* Usa flexbox para alinear los botones */
+    justify-content: center; /* Centra los botones horizontalmente */
+    gap: 1rem; /* Espacio entre los botones */
+    flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+    margin-top: 2rem; /* Agrega margen superior */
+}
+
+.button-card {
+    background-color: #e6f4f5; /* Establece el color de fondo de la tarjeta */
+    padding: 1.5rem; /* Agrega relleno interno */
+    border-radius: 8px; /* Redondea las esquinas */
+    text-align: center; /* Centra el contenido */
+    flex: 1; /* Permite que la tarjeta crezca para ocupar espacio */
+    min-width: 250px; /* Establece un ancho mínimo */
+    max-width: 350px; /* Establece un ancho máximo */
+}
+
+.button-card h3 {
+    font-size: 1.2rem; /* Establece el tamaño de fuente del título */
+    color: #333; /* Establece el color del título */
+    margin-bottom: 0.5rem; /* Agrega margen inferior */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+}
+
+.button-card .btn {
+    display: inline-block; /* Permite que el enlace se comporte como un bloque en línea */
+    color: #000000; /* Establece el color del texto */
+    text-decoration: none; /* Elimina el subrayado */
+    font-weight: bold; /* Aplica negrita */
+    font-size: 0.9rem; /* Establece el tamaño de fuente */
+}
+
+.button-card .btn:hover {
+    color: #312e2f; /* Cambia el color al pasar el ratón */
+}
+
+.button-card .btn span {
+    margin-left: 0.3rem; /* Agrega margen a la izquierda del ícono de flecha */
+}
+
+/* Estilos responsivos para el index */
+@media (max-width: 768px) {
+    .intro-buttons {
+        flex-direction: column; /* Apila los botones verticalmente */
+        align-items: center; /* Centra los botones */
+        margin-top: 1rem; /* Reduce el margen superior */
+    }
+    .button-card {
+        max-width: 100%; /* Permite que las tarjetas ocupen todo el ancho */
+    }
+    .intro-text {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        padding: 1rem; /* Reduce el relleno */
+        padding-bottom: 2rem; /* Ajusta el relleno inferior */
+    }
+    
+    .sliders div {
+       height: 200px; 
+    }
+}
