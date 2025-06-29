@@ -1,0 +1,30 @@
+Array
+(
+    [user_id] => 6
+    [producto_id] => 4
+    [cantidad] => 1
+)
+Array
+(
+    [user_id] => 14
+    [producto_id] => 11
+    [cantidad] => 1
+)
+Array
+(
+    [user_id] => 14
+    [producto_id] => 76
+    [cantidad] => 3
+)
+Array
+(
+    [user_id] => 14
+    [producto_id] => 31
+    [cantidad] => 1
+)
+Array
+(
+    [user_id] => 14
+    [producto_id] => 64
+    [cantidad] => 1
+)
